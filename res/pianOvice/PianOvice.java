@@ -7,9 +7,14 @@ public class PianOvice {
 
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", 800, 600);
+        Keyboard keyboard = new Keyboard(canvas);
+    }
+
+    public void run() {
+        canvas.draw();
     }
 
     public static void main(String[] args) {
-        
+        new PianOvice().run();
     }
 }
