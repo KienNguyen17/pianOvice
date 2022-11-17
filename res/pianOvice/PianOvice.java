@@ -6,7 +6,7 @@ public class PianOvice {
     private CanvasWindow canvas;
 
     public PianOvice() {
-        canvas = new CanvasWindow("PianOvice", 800, 600);
+        canvas = new CanvasWindow("PianOvice", 840, 600);
         Keyboard keyboard = new Keyboard(canvas);
     }
 
