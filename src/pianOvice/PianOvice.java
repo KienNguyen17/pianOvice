@@ -8,6 +8,8 @@ public class PianOvice {
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", 840, 600);
         Keyboard keyboard = new Keyboard(canvas);
+        Track track = new Track(canvas.getWidth()/2, canvas.getHeight()/2, canvas);
+        canvas.onDrag(event -> track.moveBy(event.getDelta()));
     }
 
     public void run() {

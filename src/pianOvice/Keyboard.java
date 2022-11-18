@@ -41,7 +41,6 @@ public class Keyboard {
 
     private void createBlackKeys(double startY) {
         double blackKeySize = canvas.getWidth() / NUMBER_OF_BLACK_KEY;
-
         double x = 0;
         double y = canvas.getHeight() - startY;
         List<Integer> blackKeyPositions = List.of
