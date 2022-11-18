@@ -5,16 +5,24 @@ import java.awt.Color;
 
 public class Key extends Rectangle {
 
+    private String note;
+
     public Key(double x, double y, double width, double height, Color color) {
         super(x, y, width, height);
         setFillColor(color);
         setStrokeColor(new Color(0x30808080));
         setStrokeWidth(3);
-
-        //TODO Auto-generated constructor stub
     }
-    
+        
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public void OnClick() {
-        System.out.println(this);
+        System.out.println(note);
     }
 }

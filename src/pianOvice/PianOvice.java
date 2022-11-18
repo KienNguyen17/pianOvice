@@ -11,7 +11,12 @@ public class PianOvice {
     }
 
     public void run() {
-        canvas.draw();
+        canvas.onMouseDown((event) -> {
+            GraphicsObject object = canvas.getElementAt(event.getPosition());
+            if (object instanceof Key key) {
+                key.OnClick();
+            }
+        });
     }
 
     public static void main(String[] args) {
