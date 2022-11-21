@@ -7,7 +7,7 @@ import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
 
 public class Keyboard {
-    private List<Key> keyList = new ArrayList<>();
+    private List<PianoKey> keyList = new ArrayList<>();
     private CanvasWindow canvas;
     private List<String> whiteNotes;
     private List<String> blackNotes;
@@ -30,7 +30,7 @@ public class Keyboard {
         double x = 0;
         double y = canvas.getHeight() - startY;
         for (int i = 0; i < NUMBER_OF_WHITE_KEY; i++) {
-            Key key = new Key(x, y, 
+            PianoKey key = new PianoKey(x, y, 
                 whiteKeySize, whiteKeySize * 4, Color.WHITE);
             key.setNote(whiteNotes.get(i));
             canvas.add(key);
@@ -48,7 +48,7 @@ public class Keyboard {
         int noteTracker = 0;
         for (int i = 0; i < NUMBER_OF_BLACK_KEY; i++) {
             if (blackKeyPositions.contains(i)) {
-                Key key = new Key(x, y, 
+                PianoKey key = new PianoKey(x, y, 
                     blackKeySize, blackKeySize * 4.5, Color.BLACK);
                 key.setNote(blackNotes.get(noteTracker));
                 noteTracker += 1;

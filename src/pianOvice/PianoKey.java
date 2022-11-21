@@ -3,11 +3,11 @@ package pianOvice;
 import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
 
-public class Key extends Rectangle {
+public class PianoKey extends Rectangle {
 
     private String note;
 
-    public Key(double x, double y, double width, double height, Color color) {
+    public PianoKey(double x, double y, double width, double height, Color color) {
         super(x, y, width, height);
         setFillColor(color);
         setStrokeColor(new Color(0x30808080));

@@ -1,6 +1,7 @@
 package pianOvice;
 
 import edu.macalester.graphics.*;
+import edu.macalester.graphics.events.Key;
 
 public class PianOvice {
     private CanvasWindow canvas;
@@ -10,16 +11,27 @@ public class PianOvice {
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", 840, 600);
         keyboard = new Keyboard(canvas);
-        track = new Track(canvas.getWidth()/2, canvas.getHeight()/2);
+        track = new Track(canvas.getWidth() / 2, canvas.getHeight() / 2, canvas.getWidth());
     }
 
     public void run() {
         canvas.add(track);
-        canvas.onDrag(event -> track.moveBy(new Point(event.getDelta().getX(),0)));
+        canvas.onDrag(event -> {
+            if (track.getX() + event.getDelta().getX() < 0 ) {
+                track.moveBy(new Point(event.getDelta().getX(),0));
+            }
+        }); 
+
         canvas.onMouseDown((event) -> {
             GraphicsObject object = canvas.getElementAt(event.getPosition());
-            if (object instanceof Key key) {
+            if (object instanceof PianoKey key) {
                 track.addNote(key.getNote());
+            }
+        });
+
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.DELETE_OR_BACKSPACE) {
+                track.deleteNote();
             }
         });
     }
