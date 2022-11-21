@@ -19,7 +19,6 @@ public class Track extends GraphicsGroup{
         trackDisplay = new Rectangle(x, y, 100000, 84);
         trackDisplay.setCenter(x, y);
         trackDisplay.setStrokeColor(Color.BLACK);
-        // add(new GraphicsText("text", x, y));
         add(trackDisplay);
     }
 
