@@ -23,6 +23,6 @@ public class Key extends Rectangle {
     }
 
     public void OnClick() {
-        System.out.println(note);
+        
     }
 }
