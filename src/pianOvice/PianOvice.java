@@ -53,6 +53,16 @@ public class PianOvice {
         }
     }
 
+    private void playTrack(Track track) {
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.RETURN_OR_ENTER) {
+                if (track.isActive()) {
+                    track.playMelody();
+                }
+            }
+        });
+    }
+
     public void run() {
         for (Track track : tracks) {
             canvas.add(track);
@@ -85,29 +95,9 @@ public class PianOvice {
             }
         });
 
-        canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.RETURN_OR_ENTER) {
-                if (tracks.get(0).isActive()) {
-                    tracks.get(0).playMelody();
-                }
-            }
-        });
-
-        canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.RETURN_OR_ENTER) {
-                if (tracks.get(1).isActive()) {
-                    tracks.get(1).playMelody();
-                }
-            }
-        });
-
-        canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.RETURN_OR_ENTER) {
-                if (tracks.get(2).isActive()) {
-                    tracks.get(2).playMelody();
-                }
-            }
-        });
+        for (Track track : tracks) {
+            playTrack(track);;
+        }
 
         canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.SPACE && getActiveTrack() != null) {
