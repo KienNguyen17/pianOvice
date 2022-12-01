@@ -37,6 +37,7 @@ public class Track extends GraphicsGroup{
     }
 
     public void deleteNote() {
+        textX = textX - texts.get(texts.size() - 1).getWidth() - 20;
         remove(texts.get(texts.size() - 1));
         melody.remove(melody.size() - 1);
         texts.remove(texts.size() - 1);

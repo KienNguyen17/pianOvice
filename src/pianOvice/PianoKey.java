@@ -8,6 +8,7 @@ public class PianoKey extends Rectangle {
     private String note;
     private double pitch;
     private AudioBuffer buffer;
+    public static final double NOTE_LENGTH = 0.5;
 
     public PianoKey(double x, double y, double width, double height, Color color, String note, double pitch) {
         super(x, y, width, height);
@@ -16,9 +17,9 @@ public class PianoKey extends Rectangle {
         setStrokeWidth(3);
         this.note = note;
         this.pitch = pitch;
-        buffer = new AudioBuffer(Utils.convertSecondsToSamples(1));
-        buffer.mix(this, 0, Utils.convertSecondsToSamples(1));
-        buffer.normalize();
+        buffer = new AudioBuffer(Utils.convertSecondsToSamples(NOTE_LENGTH));
+        buffer.fill(this);
+        // buffer.normalize();
     }
         
     public String getNote() {
