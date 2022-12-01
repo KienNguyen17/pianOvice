@@ -46,11 +46,11 @@ public class AudioBuffer {
     /**
      * Fills the entire buffer by sampling the given signal, overwriting any data already present.
      */
-    // public void fill(Signal signal) {
-    //     for (int n = 0; n < samples.length; n++) {
-    //         samples[n] = (float) signal.amplitudeAt(n);
-    //     }
-    // }
+    public void fill(PianoKey key) {
+        for (int n = 0; n < samples.length; n++) {
+            samples[n] = (float) key.amplitudeAt(n);
+        }
+    }
 
     /**
      * Returns the peak amplitude, i.e. the largest absolute value of any individual sample.
@@ -198,14 +198,14 @@ public class AudioBuffer {
      * @throws IllegalArgumentException If the offset or duration extend outside the bounds of this
      *                  buffer.
      */
-    // public void mix(Signal signal, int offset, int duration) {
-    //     if (offset >= samples.length || offset < 0 || offset + duration > samples.length) {
-    //         throw new IllegalArgumentException("input signal is out of bounds");
-    //     } else {
-    //         for (int n = 0; n < duration; n++) {
-    //             samples[n+offset] += (float) signal.amplitudeAt(n);
-    //         }
-    //     }
-    // }
+    public void mix(PianoKey key, int offset, int duration) {
+        if (offset >= samples.length || offset < 0 || offset + duration > samples.length) {
+            throw new IllegalArgumentException("input signal is out of bounds");
+        } else {
+            for (int n = 0; n < duration; n++) {
+                samples[n+offset] += (float) key.amplitudeAt(n);
+            }
+        }
+    }
 }
 
