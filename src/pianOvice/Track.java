@@ -23,6 +23,10 @@ public class Track extends GraphicsGroup{
         add(trackDisplay);
     }
 
+    public void setColor(Color color) {
+        trackDisplay.setFillColor(color);
+    }
+
     public void addNote(Note note) {
         GraphicsText noteDisplay = new GraphicsText();
         noteDisplay.setText(note.getName());
