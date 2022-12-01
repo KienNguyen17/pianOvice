@@ -17,7 +17,7 @@ public class PianOvice {
     public void run() {
         canvas.add(track);
         canvas.onDrag(event -> {
-            if (track.getX() + event.getDelta().getX() < 0 ) {
+            if (track.getX() + event.getDelta().getX() < 0 && track.isActive()) {
                 track.moveBy(new Point(event.getDelta().getX(),0));
             }
         }); 
@@ -25,20 +25,28 @@ public class PianOvice {
         canvas.onMouseDown((event) -> {
             GraphicsObject object = canvas.getElementAt(event.getPosition());
             if (object instanceof PianoKey key) {
-                track.addNote(key.getNote());
+                if (track.isActive()) {
+                    track.addNote(key.getNote());
+                }
                 key.getNote().makeSound();
             }
         });
 
         canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.DELETE_OR_BACKSPACE) {
+            if (event.getKey() == Key.DELETE_OR_BACKSPACE && track.isActive()) {
                 track.deleteNote();
             }
         });
 
         canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.P) {
+            if (event.getKey() == Key.RETURN_OR_ENTER && track.isActive()) {
                 track.playMelody();
+            }
+        });
+
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.SPACE && track.isActive()) {
+                track.addNote(new Note("𝄽", -48));
             }
         });
     }

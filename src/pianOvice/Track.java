@@ -11,6 +11,7 @@ public class Track extends GraphicsGroup{
     private List<GraphicsText> texts = new ArrayList<>();
     private double textX, textY;
     private Rectangle trackDisplay;
+    private boolean active = true;
 
     public Track(double x, double y, double size) {
         super();
@@ -23,7 +24,8 @@ public class Track extends GraphicsGroup{
     }
 
     public void addNote(Note note) {
-        GraphicsText noteDisplay = new GraphicsText(note.getName());
+        GraphicsText noteDisplay = new GraphicsText();
+        noteDisplay.setText(note.getName());
         noteDisplay.setFontSize(trackDisplay.getHeight() * 0.5);
         noteDisplay.setFillColor(Color.BLACK);
 
@@ -53,4 +55,12 @@ public class Track extends GraphicsGroup{
         }
         buffer.play();
      }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
