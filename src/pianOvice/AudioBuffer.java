@@ -46,9 +46,9 @@ public class AudioBuffer {
     /**
      * Fills the entire buffer by sampling the given signal, overwriting any data already present.
      */
-    public void fill(PianoKey key) {
+    public void fill(Note note) {
         for (int n = 0; n < samples.length; n++) {
-            samples[n] = (float) key.amplitudeAt(n);
+            samples[n] = (float) note.amplitudeAt(n);
         }
     }
 
@@ -198,12 +198,12 @@ public class AudioBuffer {
      * @throws IllegalArgumentException If the offset or duration extend outside the bounds of this
      *                  buffer.
      */
-    public void mix(PianoKey key, int offset, int duration) {
+    public void mix(Note note, int offset, int duration) {
         if (offset >= samples.length || offset < 0 || offset + duration > samples.length) {
             throw new IllegalArgumentException("input signal is out of bounds");
         } else {
             for (int n = 0; n < duration; n++) {
-                samples[n+offset] += (float) key.amplitudeAt(n);
+                samples[n+offset] += (float) note.amplitudeAt(n);
             }
         }
     }

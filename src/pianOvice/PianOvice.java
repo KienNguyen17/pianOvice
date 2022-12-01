@@ -25,8 +25,8 @@ public class PianOvice {
         canvas.onMouseDown((event) -> {
             GraphicsObject object = canvas.getElementAt(event.getPosition());
             if (object instanceof PianoKey key) {
-                track.addNote(key.getNote());
-                key.makeSound();
+                track.addNote(key.getNote().getNote());
+                key.getNote().makeSound();
             }
         });
 
