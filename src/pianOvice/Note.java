@@ -1,25 +1,24 @@
 package pianOvice;
 
 public class Note {
-    private String note;
+    private String name;
     private AudioBuffer buffer;
     private double pitch;
     public static final double NOTE_LENGTH = 0.5;
     
-    public Note(String note, double pitch) {
-        this.note = note;
+    public Note(String name, double pitch) {
+        this.name = name;
         this.pitch = pitch;
         buffer = new AudioBuffer(Utils.convertSecondsToSamples(NOTE_LENGTH));
         buffer.fill(this);
-        // buffer.normalize();
     }
 
-    public String getNote() {
-        return note;
+    public String getName() {
+        return name;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setName(String note) {
+        this.name = note;
     }
     
     public double getPitch() {

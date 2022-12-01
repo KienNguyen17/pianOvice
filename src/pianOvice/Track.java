@@ -7,7 +7,7 @@ import java.util.List;
 import edu.macalester.graphics.*;
 
 public class Track extends GraphicsGroup{
-    private List<String> melody = new ArrayList<>();
+    private List<Note> melody = new ArrayList<>();
     private List<GraphicsText> texts = new ArrayList<>();
     private double textX, textY;
     private Rectangle trackDisplay;
@@ -22,8 +22,8 @@ public class Track extends GraphicsGroup{
         add(trackDisplay);
     }
 
-    public void addNote(String note) {
-        GraphicsText noteDisplay = new GraphicsText(note);
+    public void addNote(Note note) {
+        GraphicsText noteDisplay = new GraphicsText(note.getName());
         noteDisplay.setFontSize(trackDisplay.getHeight() * 0.5);
         noteDisplay.setFillColor(Color.BLACK);
 
@@ -42,4 +42,15 @@ public class Track extends GraphicsGroup{
         melody.remove(melody.size() - 1);
         texts.remove(texts.size() - 1);
     }
+
+    public void playMelody() {
+        AudioBuffer buffer = new AudioBuffer(
+            Utils.convertSecondsToSamples(melody.size()*Note.NOTE_LENGTH));
+        int newStart = 0;
+        for (Note note : melody) {
+            buffer.mix(note, newStart, Utils.convertSecondsToSamples(Note.NOTE_LENGTH));
+            newStart += Utils.convertSecondsToSamples(Note.NOTE_LENGTH);
+        }
+        buffer.play();
+     }
 }
