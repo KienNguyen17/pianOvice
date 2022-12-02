@@ -32,8 +32,6 @@ public class Keyboard {
         createBlackKeys(startY);
     }
 
-    // (0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23)
-
     private void createWhiteKeys(double startY) {
         double whiteKeySize = canvas.getWidth() / NUMBER_OF_WHITE_KEY;
         double x = 0;

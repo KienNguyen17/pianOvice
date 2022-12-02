@@ -20,6 +20,7 @@ public class PianOvice {
 
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas.setBackground(new Color(0xB4869F));
         keyboard = new Keyboard(canvas);
         double trackHeight = canvas.getHeight() / 2;
         for (int i=0 ; i<NUMBER_OF_TRACK ; i++) {
@@ -34,7 +35,7 @@ public class PianOvice {
 
     private void createPlayButton() {
         playButton = new Button("Play"); 
-        playButton.setCenter(CANVAS_WIDTH - playButton.getWidth(), CANVAS_HEIGHT * 0.05);
+        playButton.setCenter(CANVAS_WIDTH - playButton.getWidth() - 13, CANVAS_HEIGHT * 0.05);
         canvas.add(playButton);
     }
 
@@ -42,8 +43,7 @@ public class PianOvice {
         playButton.onClick(() -> {
             if (track.isActive()) {
                 track.playMelody();
-            }
-            
+            } 
         });
     }
 
@@ -61,7 +61,7 @@ public class PianOvice {
         activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth() + 44, track.getCenter().getY());
         activeButton.onClick(() -> {
             track.setActive(!track.isActive());
-            track.setColor(track.isActive() ? Color.WHITE : Color.DARK_GRAY);
+            track.setColor(track.isActive() ? new Color(0x2D5A80) : Color.DARK_GRAY);
             createBlock(track, trackHeight);
         });
         canvas.add(activeButton);

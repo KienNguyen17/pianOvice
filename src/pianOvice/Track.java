@@ -20,6 +20,7 @@ public class Track extends GraphicsGroup{
         trackDisplay = new Rectangle(x - size / 2, y - size * 0.05, 
                                 100000, size * 0.1);
         trackDisplay.setStrokeColor(Color.BLACK);
+        trackDisplay.setFillColor(new Color(0x2D5A80));
         add(trackDisplay);
     }
 
