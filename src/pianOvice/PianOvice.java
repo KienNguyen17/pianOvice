@@ -114,7 +114,7 @@ public class PianOvice {
         });
 
         for (Track track : tracks) {
-            activatePlayButton(track);;
+            activatePlayButton(track);
         }
 
         canvas.onKeyDown((event) -> {
