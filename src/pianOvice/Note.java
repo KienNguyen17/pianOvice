@@ -4,7 +4,7 @@ public class Note {
     private String name;
     private AudioBuffer buffer;
     private double pitch;
-    public static final double NOTE_LENGTH = 0.5;
+    public static final double NOTE_LENGTH = 0.3;
     
     public Note(String name, double pitch) {
         this.name = name;
