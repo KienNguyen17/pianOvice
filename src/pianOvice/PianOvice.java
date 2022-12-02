@@ -16,6 +16,7 @@ public class PianOvice {
     private final int NUMBER_OF_TRACK = 3;
     private Keyboard keyboard;
     private Button activeButton;
+    private Button playButton;
 
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -27,6 +28,22 @@ public class PianOvice {
             createActiveButton(track);
             trackHeight += (-track.getHeight() - 5);
         }
+        createPlayButton();
+    }
+
+    private void createPlayButton() {
+        playButton = new Button("Play"); 
+        playButton.setCenter(CANVAS_WIDTH - playButton.getWidth(), CANVAS_HEIGHT * 0.05);
+        canvas.add(playButton);
+    }
+
+    private void activatePlayButton(Track track) {
+        playButton.onClick(() -> {
+            if (track.isActive()) {
+                track.playMelody();
+            }
+            
+        });
     }
 
     private void createActiveButton(Track track) {
@@ -51,16 +68,6 @@ public class PianOvice {
         } else {
             return null;
         }
-    }
-
-    private void playTrack(Track track) {
-        canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.RETURN_OR_ENTER) {
-                if (track.isActive()) {
-                    track.playMelody();
-                }
-            }
-        });
     }
 
     public void run() {
@@ -96,7 +103,7 @@ public class PianOvice {
         });
 
         for (Track track : tracks) {
-            playTrack(track);;
+            activatePlayButton(track);;
         }
 
         canvas.onKeyDown((event) -> {
