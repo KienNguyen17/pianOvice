@@ -24,17 +24,28 @@ public class PianOvice {
         for (int i=0 ; i<NUMBER_OF_TRACK ; i++) {
             Track track = new Track(canvas.getWidth() / 2, trackHeight, canvas.getWidth());
             tracks.add(track);
-            createActiveButton(track);
+            createBlock(track, trackHeight);
+            createActiveButton(track, trackHeight);
             trackHeight += (-track.getHeight() - 5);
         }
     }
 
-    private void createActiveButton(Track track) {
-        activeButton = new Button("active");
-        activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth(), track.getCenter().getY());
+    private void createBlock(Track track, double trackHeight) {
+        double blockWidth = 140;
+        Rectangle block = new Rectangle(CANVAS_WIDTH - blockWidth, 
+            trackHeight, blockWidth,canvas.getWidth()*0.1);
+        block.setFillColor(Color.BLACK);
+        block.setCenter(CANVAS_WIDTH - blockWidth/2, trackHeight);
+        canvas.add(block);
+    }
+
+    private void createActiveButton(Track track, double trackHeight) {
+        activeButton = new Button("active/inactive");
+        activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth() + 44, track.getCenter().getY());
         activeButton.onClick(() -> {
             track.setActive(!track.isActive());
             track.setColor(track.isActive() ? Color.WHITE : Color.DARK_GRAY);
+            createBlock(track, trackHeight);
         });
         canvas.add(activeButton);
     }
