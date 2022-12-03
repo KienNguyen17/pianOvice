@@ -26,8 +26,9 @@ public class PianOvice {
         for (int i=0 ; i<NUMBER_OF_TRACK ; i++) {
             Track track = new Track(canvas.getWidth() / 2, trackHeight, canvas.getWidth());
             tracks.add(track);
+            canvas.add(track);
             createBlock(track, trackHeight);
-            createActiveButton(track, trackHeight);
+            createActiveButton(track);
             trackHeight += (-track.getHeight() - 5);
         }
         createPlayButton();
@@ -56,13 +57,12 @@ public class PianOvice {
         canvas.add(block);
     }
 
-    private void createActiveButton(Track track, double trackHeight) {
+    private void createActiveButton(Track track) {
         activeButton = new Button("active/inactive");
         activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth() + 44, track.getCenter().getY());
         activeButton.onClick(() -> {
             track.setActive(!track.isActive());
             track.setColor(track.isActive() ? new Color(0x2D5A80) : Color.DARK_GRAY);
-            createBlock(track, trackHeight);
         });
         canvas.add(activeButton);
     }
@@ -82,10 +82,10 @@ public class PianOvice {
     }
 
     public void run() {
-        for (Track track : tracks) {
-            canvas.add(track);
-        }
-    
+        // for (Track track : tracks) {
+        //     canvas.add(track);
+        // }
+
         canvas.onDrag(event -> {
             if (getActiveTrack() != null) {
                 Track track = getActiveTrack();
