@@ -12,9 +12,12 @@ public class Track extends GraphicsGroup{
     private double textX, textY;
     private Rectangle trackDisplay;
     private boolean active = true;
+    private int cursor;
+    private Line cursorDisplay;
 
     public Track(double x, double y, double size) {
         super();
+        cursor = -1;
         textX = 20;
         textY = y;
         trackDisplay = new Rectangle(x - size / 2, y - size * 0.05, 
@@ -22,6 +25,10 @@ public class Track extends GraphicsGroup{
         trackDisplay.setStrokeColor(Color.BLACK);
         trackDisplay.setFillColor(new Color(0x2D5A80));
         add(trackDisplay);
+        cursorDisplay = new Line(x - size / 2 + 18, y - size * 0.05, 
+            x - size / 2 + 18, y - size * 0.05 + size * 0.1);
+        cursorDisplay.setStrokeWidth(2);
+        add(cursorDisplay);
     }
 
     public void setColor(Color color) {
@@ -45,12 +52,14 @@ public class Track extends GraphicsGroup{
         add(noteDisplay);
         melody.add(note);
         texts.add(noteDisplay);
+        advanceCursor(true);
     }
 
     public void deleteNote() {
         textX = textX - texts.get(texts.size() - 1).getWidth() - 20;
         remove(texts.get(texts.size() - 1));
         melody.remove(melody.size() - 1);
+        advanceCursor(false);
         texts.remove(texts.size() - 1);
     }
 
@@ -71,5 +80,15 @@ public class Track extends GraphicsGroup{
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    private void advanceCursor(boolean isForward) {
+        if (isForward) {
+            cursor += 1;
+            cursorDisplay.moveBy(texts.get(cursor).getWidth() + 20, 0);
+        } else {
+            cursorDisplay.moveBy(-texts.get(cursor).getWidth() - 20, 0);
+            cursor -= 1;
+        }
     }
 }
