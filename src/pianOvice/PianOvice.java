@@ -123,6 +123,16 @@ public class PianOvice {
                 track.addNote(new Note("𝄽", -48));
             }
         });
+
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.RIGHT_ARROW && getActiveTrack() != null) {
+                Track track = getActiveTrack();
+                track.advanceCursor(true);
+            } else if (event.getKey() == Key.LEFT_ARROW && getActiveTrack() != null) {
+                Track track = getActiveTrack();
+                track.advanceCursor(false);
+            }    
+        });
     }
 
     public static void main(String[] args) {
