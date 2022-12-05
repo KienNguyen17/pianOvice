@@ -37,7 +37,7 @@ public class PianOvice {
 
     private void createTrack() {
         double trackHeight = canvas.getHeight() / 2;
-        for (int i = 0 ; i < NUMBER_OF_TRACK ; i++) {
+        for (int i = 0; i < NUMBER_OF_TRACK; i++) {
             Track track = new Track(canvas.getWidth() / 2, trackHeight, canvas.getWidth());
             tracks.add(track);
             canvas.add(track);
@@ -160,19 +160,16 @@ public class PianOvice {
 
         canvas.onKeyDown((event) -> {
             if (getActiveTrack() != null) {
+                Track track = getActiveTrack();
                 if (event.getKey() == Key.DELETE_OR_BACKSPACE) {
-                    Track track = getActiveTrack();
                     track.deleteNote();
                 }
                 if (event.getKey() == Key.SPACE) {
-                    Track track = getActiveTrack();
                     track.addNote(new Note("𝄽", -48));
                 }
                 if (event.getKey() == Key.RIGHT_ARROW) {
-                    Track track = getActiveTrack();
                     track.advanceCursor(true);
                 } else if (event.getKey() == Key.LEFT_ARROW) {
-                    Track track = getActiveTrack();
                     track.advanceCursor(false);
                 } 
             }
