@@ -38,7 +38,7 @@ public class PianOvice {
 
     private void createPlayButton() {
         playButton = new Button("Play"); 
-        playButton.setCenter(CANVAS_WIDTH - playButton.getWidth() - 13, CANVAS_HEIGHT * 0.05);
+        playButton.setCenter(CANVAS_WIDTH - playButton.getWidth() / 2 - 8, CANVAS_HEIGHT * 0.06);
         canvas.add(playButton);
     }
 
@@ -52,20 +52,19 @@ public class PianOvice {
 
     private void createSampleButton() {
         sampleButton = new Button("Sample"); 
-        sampleButton.setCenter(CANVAS_WIDTH - sampleButton.getWidth() - playButton.getWidth() - 13, 
-                               CANVAS_HEIGHT * 0.05);
+        sampleButton.setCenter(
+            CANVAS_WIDTH - sampleButton.getWidth() - playButton.getWidth() / 2 - 8, 
+            CANVAS_HEIGHT * 0.06);
         canvas.add(sampleButton);
     }
 
     private void activateSampleButton() {
         sampleButton.onClick(() -> {
             for (Note note: SampleReader.track1Sample) {
-                System.out.println(note);
                 tracks.get(0).addNote(note);
             }
 
             for (Note note: SampleReader.track2Sample) {
-                System.out.println(note);
                 tracks.get(1).addNote(note);
             }
         });
@@ -85,7 +84,7 @@ public class PianOvice {
         activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth() + 44, track.getCenter().getY());
         activeButton.onClick(() -> {
             track.setActive(!track.isActive());
-            track.setColor(track.isActive() ? new Color(0x2D5A80) : Color.DARK_GRAY);
+            track.setColor(track.isActive() ? Color.WHITE : Color.DARK_GRAY);
         });
         canvas.add(activeButton);
     }

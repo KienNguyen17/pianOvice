@@ -26,13 +26,13 @@ public class Track extends GraphicsGroup{
         trackDisplay = new Rectangle(x - size / 2, y - size * 0.05, 
                                 100000, size * 0.1);
         trackDisplay.setStrokeColor(Color.BLACK);
-        trackDisplay.setFillColor(new Color(0x2D5A80));
+        trackDisplay.setFillColor(Color.WHITE);
         add(trackDisplay);
         
         cursorDisplay = new Line(x - size / 2 + 16, y - size * 0.05, 
             x - size / 2 + 16, y - size * 0.05 + size * 0.1);
         cursorDisplay.setStrokeWidth(2.5);
-        cursorDisplay.setStrokeColor(Color.WHITE);
+        cursorDisplay.setStrokeColor(new Color(0x2D5A80));
         add(cursorDisplay);
     }
 
