@@ -12,17 +12,30 @@ public class PianOvice {
     private CanvasWindow canvas;
     private final int CANVAS_WIDTH = 840;
     private final int CANVAS_HEIGHT = 600;
+
     private List<Track> tracks = new ArrayList<>();
     private final int NUMBER_OF_TRACK = 3;
     private Keyboard keyboard;
+
     private Button activeButton;
     private Button playButton;
     private Button sampleButton;
+    private Button deleteButton;
 
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(new Color(0xB4869F));
-        keyboard = new Keyboard(canvas);
+
+        keyboard = new Keyboard();
+        keyboard.createKeys(canvas);
+
+        createTrack();
+        createPlayButton();
+        createSampleButton();
+        createDeleteButton();
+    }
+
+    private void createTrack() {
         double trackHeight = canvas.getHeight() / 2;
         for (int i = 0 ; i < NUMBER_OF_TRACK ; i++) {
             Track track = new Track(canvas.getWidth() / 2, trackHeight, canvas.getWidth());
@@ -32,8 +45,6 @@ public class PianOvice {
             createActiveButton(track);
             trackHeight += (-track.getHeight() - 5);
         }
-        createPlayButton();
-        createSampleButton();
     }
 
     private void createPlayButton() {
@@ -60,14 +71,25 @@ public class PianOvice {
 
     private void activateSampleButton() {
         sampleButton.onClick(() -> {
-            for (Note note: SampleReader.track1Sample) {
+            for (Track track : tracks) {
+                track.deleteAll();
+            }
+            for (Note note: Sample.track1Sample) {
                 tracks.get(0).addNote(note);
             }
 
-            for (Note note: SampleReader.track2Sample) {
+            for (Note note: Sample.track2Sample) {
                 tracks.get(1).addNote(note);
             }
         });
+    }
+
+    private void createDeleteButton() {
+        deleteButton = new Button("Delete All"); 
+        deleteButton.setCenter(
+            CANVAS_WIDTH - deleteButton.getWidth() - sampleButton.getWidth() - playButton.getWidth() / 2 - 13, 
+            CANVAS_HEIGHT * 0.06);
+        canvas.add(deleteButton);
     }
 
     private void createBlock(Track track, double trackHeight) {
@@ -104,11 +126,17 @@ public class PianOvice {
     }
 
     public void run() {
-        for (Track track : tracks) {
+        for (Track track: tracks) {
             activatePlayButton(track);
         }
 
         activateSampleButton();
+
+        deleteButton.onClick(() -> {
+            for (Track track: tracks) {
+                track.deleteAll();
+            }
+        });
 
         canvas.onDrag(event -> {
             if (getActiveTrack() != null) {
@@ -131,21 +159,23 @@ public class PianOvice {
         });
 
         canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.DELETE_OR_BACKSPACE && getActiveTrack() != null) {
-                Track track = getActiveTrack();
-                track.deleteNote();
+            if (getActiveTrack() != null) {
+                if (event.getKey() == Key.DELETE_OR_BACKSPACE) {
+                    Track track = getActiveTrack();
+                    track.deleteNote();
+                }
+                if (event.getKey() == Key.SPACE) {
+                    Track track = getActiveTrack();
+                    track.addNote(new Note("𝄽", -48));
+                }
+                if (event.getKey() == Key.RIGHT_ARROW) {
+                    Track track = getActiveTrack();
+                    track.advanceCursor(true);
+                } else if (event.getKey() == Key.LEFT_ARROW) {
+                    Track track = getActiveTrack();
+                    track.advanceCursor(false);
+                } 
             }
-            if (event.getKey() == Key.SPACE && getActiveTrack() != null) {
-                Track track = getActiveTrack();
-                track.addNote(new Note("𝄽", -48));
-            }
-            if (event.getKey() == Key.RIGHT_ARROW && getActiveTrack() != null) {
-                Track track = getActiveTrack();
-                track.advanceCursor(true);
-            } else if (event.getKey() == Key.LEFT_ARROW && getActiveTrack() != null) {
-                Track track = getActiveTrack();
-                track.advanceCursor(false);
-            }    
         });
     }
 

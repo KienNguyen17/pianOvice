@@ -2,7 +2,7 @@ package pianOvice;
 
 import java.util.List;
 
-public class SampleReader {
+public class Sample {
     public static final List<Note> track1Sample = List.of(
         new Note("A3", 57), 
         new Note("A3", 57), 
@@ -61,11 +61,11 @@ public class SampleReader {
         new Note("A3", 57),
         new Note("𝄽", -48),
         new Note("G3", 55),
-        new Note("𝄽", -48),
+        new Note("G3", 55),
         new Note("F#3", 54), 
-        new Note("𝄽", -48),
+        new Note("F#3", 54),
         new Note("E3", 52),
-        new Note("𝄽", -48));
+        new Note("E3", 52));
 
     public static final List<Note> track2Sample = List.of(
         new Note("E3", 52), new Note("E3", 52),
@@ -100,7 +100,7 @@ public class SampleReader {
         new Note("𝄽", -48), 
         new Note("E3", 52), 
         new Note("𝄽", -48), 
-        new Note("G4", 67), new Note("G4", 67),
-        new Note("F#4", 66), new Note("F#4", 66),
-        new Note("E4", 64), new Note("E4", 64));
+        new Note("G4", 67), new Note("𝄽", -48),
+        new Note("F#4", 66), new Note("𝄽", -48),
+        new Note("E4", 64), new Note("𝄽", -48));
 }

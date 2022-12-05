@@ -40,10 +40,6 @@ public class Track extends GraphicsGroup{
         trackDisplay.setFillColor(color);
     }
 
-    public Rectangle getTrackDisplay() {
-        return trackDisplay;
-    }
-
     public void addNote(Note note) {
         GraphicsText noteDisplay = new GraphicsText();
         noteDisplay.setText(note.getName());
@@ -52,10 +48,10 @@ public class Track extends GraphicsGroup{
 
         noteDisplay.setCenter(textX + noteDisplay.getWidth() / 2, textY);
 
-        melody.add(cursor+1, note);
-        texts.add(cursor+1, noteDisplay);
+        melody.add(cursor + 1, note);
+        texts.add(cursor + 1, noteDisplay);
 
-        for (int i = cursor + 2; i<texts.size(); i++) {
+        for (int i = cursor + 2; i < texts.size(); i++) {
             GraphicsText text = texts.get(i);
             text.moveBy(noteDisplay.getWidth() + 20, 0);
         }
@@ -68,7 +64,7 @@ public class Track extends GraphicsGroup{
         if (cursor > -1) {
             remove(texts.get(cursor));
             melody.remove(cursor);
-            for (int i = cursor + 1; i<texts.size(); i++) {
+            for (int i = cursor + 1; i < texts.size(); i++) {
                 GraphicsText text = texts.get(i);
                 text.moveBy(-texts.get(cursor).getWidth() - 20, 0);
             }
@@ -77,9 +73,20 @@ public class Track extends GraphicsGroup{
         }
     }
 
+    public void deleteAll() {
+        while (cursor < texts.size()-1) {
+            advanceCursor(true);
+        }
+        while (cursor > -1) {
+            deleteNote();
+        }
+        melody.clear();
+        texts.clear();
+    }
+
     public void playMelody() {
         AudioBuffer buffer = new AudioBuffer(
-            Utils.convertSecondsToSamples(melody.size()*Note.NOTE_LENGTH));
+            Utils.convertSecondsToSamples(melody.size() * Note.NOTE_LENGTH));
         int newStart = 0;
         for (Note note : melody) {
             buffer.mix(note, newStart, Utils.convertSecondsToSamples(Note.NOTE_LENGTH));
@@ -97,7 +104,7 @@ public class Track extends GraphicsGroup{
     }
 
     public void advanceCursor(boolean isForward) {
-        if (isForward && cursor < texts.size()-1) {
+        if (isForward && cursor < texts.size() - 1) {
             cursor += 1;
             cursorDisplay.moveBy(texts.get(cursor).getWidth() + 20, 0);
             textX += texts.get(cursor).getWidth() + 20;
