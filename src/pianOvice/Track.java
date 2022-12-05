@@ -9,22 +9,26 @@ import edu.macalester.graphics.*;
 public class Track extends GraphicsGroup{
     private List<Note> melody = new ArrayList<>();
     private List<GraphicsText> texts = new ArrayList<>();
-    private double textX, textY;
-    private Rectangle trackDisplay;
-    private boolean active = true;
-    private int cursor;
-    private Line cursorDisplay;
 
+    private Rectangle trackDisplay;
+    private double textX, textY;
+    private boolean active = true;
+
+    private Line cursorDisplay;
+    private int cursor;
+   
     public Track(double x, double y, double size) {
         super();
         cursor = -1;
         textX = 20;
         textY = y;
+
         trackDisplay = new Rectangle(x - size / 2, y - size * 0.05, 
                                 100000, size * 0.1);
         trackDisplay.setStrokeColor(Color.BLACK);
         trackDisplay.setFillColor(new Color(0x2D5A80));
         add(trackDisplay);
+        
         cursorDisplay = new Line(x - size / 2 + 16, y - size * 0.05, 
             x - size / 2 + 16, y - size * 0.05 + size * 0.1);
         cursorDisplay.setStrokeWidth(2.5);

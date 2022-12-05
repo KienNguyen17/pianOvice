@@ -17,13 +17,14 @@ public class PianOvice {
     private Keyboard keyboard;
     private Button activeButton;
     private Button playButton;
+    private Button sampleButton;
 
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(new Color(0xB4869F));
         keyboard = new Keyboard(canvas);
         double trackHeight = canvas.getHeight() / 2;
-        for (int i=0 ; i<NUMBER_OF_TRACK ; i++) {
+        for (int i = 0 ; i < NUMBER_OF_TRACK ; i++) {
             Track track = new Track(canvas.getWidth() / 2, trackHeight, canvas.getWidth());
             tracks.add(track);
             canvas.add(track);
@@ -32,6 +33,7 @@ public class PianOvice {
             trackHeight += (-track.getHeight() - 5);
         }
         createPlayButton();
+        createSampleButton();
     }
 
     private void createPlayButton() {
@@ -45,6 +47,27 @@ public class PianOvice {
             if (track.isActive()) {
                 track.playMelody();
             } 
+        });
+    }
+
+    private void createSampleButton() {
+        sampleButton = new Button("Sample"); 
+        sampleButton.setCenter(CANVAS_WIDTH - sampleButton.getWidth() - playButton.getWidth() - 13, 
+                               CANVAS_HEIGHT * 0.05);
+        canvas.add(sampleButton);
+    }
+
+    private void activateSampleButton() {
+        sampleButton.onClick(() -> {
+            for (Note note: SampleReader.track1Sample) {
+                System.out.println(note);
+                tracks.get(0).addNote(note);
+            }
+
+            for (Note note: SampleReader.track2Sample) {
+                System.out.println(note);
+                tracks.get(1).addNote(note);
+            }
         });
     }
 
@@ -82,9 +105,11 @@ public class PianOvice {
     }
 
     public void run() {
-        // for (Track track : tracks) {
-        //     canvas.add(track);
-        // }
+        for (Track track : tracks) {
+            activatePlayButton(track);
+        }
+
+        activateSampleButton();
 
         canvas.onDrag(event -> {
             if (getActiveTrack() != null) {
@@ -111,20 +136,10 @@ public class PianOvice {
                 Track track = getActiveTrack();
                 track.deleteNote();
             }
-        });
-
-        for (Track track : tracks) {
-            activatePlayButton(track);
-        }
-
-        canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.SPACE && getActiveTrack() != null) {
                 Track track = getActiveTrack();
                 track.addNote(new Note("𝄽", -48));
             }
-        });
-
-        canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.RIGHT_ARROW && getActiveTrack() != null) {
                 Track track = getActiveTrack();
                 track.advanceCursor(true);
