@@ -6,6 +6,11 @@ import java.util.List;
 
 import edu.macalester.graphics.*;
 
+/**
+ * Create a track, represented on the canvas by a long rectangle that can display 
+ * GraphicsText objects of the notes added, while keeping track of the order of the 
+ * names and pitches of notes added to it.
+ */
 public class Track extends GraphicsGroup{
     private List<Note> melody = new ArrayList<>();
     private List<GraphicsText> texts = new ArrayList<>();
@@ -17,6 +22,15 @@ public class Track extends GraphicsGroup{
     private Line cursorDisplay;
     private int cursor;
    
+    /**
+     * Create a GraphicsGroup that includes a long rectangle and a cursor to keep track
+     * of the notes added. The rectangle is placed such that its left edge touches the left
+     * edge of the canvas. The cursor is placed at the start of the rectangle.
+     * 
+     * @param x The x-coordinate of the center of the visible portion of the rectangle 
+     * @param y The y-coordinate of the center of the visible portion of the rectangle 
+     * @param size The width of the visible portion of the rectangle that fits on the screen
+     */
     public Track(double x, double y, double size) {
         super();
         cursor = -1;
@@ -36,10 +50,17 @@ public class Track extends GraphicsGroup{
         add(cursorDisplay);
     }
 
+    /**
+     * Set the fill color of the rectangle that represents the track 
+     */
     public void setColor(Color color) {
         trackDisplay.setFillColor(color);
     }
 
+    /**
+     * Create a text representation of the note right before the location of the cursor 
+     * on the rectangle and add the note to the melody at the corresponding location.
+     */
     public void addNote(Note note) {
         GraphicsText noteDisplay = new GraphicsText();
         noteDisplay.setText(note.getName());
@@ -60,6 +81,10 @@ public class Track extends GraphicsGroup{
         advanceCursor(true);
     }
 
+    /**
+     * Remove the text representation of the note before the cursor and remove the 
+     * corresponding note in the melody.
+     */
     public void deleteNote() {
         if (cursor > -1) {
             remove(texts.get(cursor));
@@ -73,6 +98,10 @@ public class Track extends GraphicsGroup{
         }
     }
 
+    /**
+     * Remove every GraphicsText object on the rectangle, removing all the note in
+     * the melody and moving the cursor back to the beginning.
+     */
     public void deleteAll() {
         while (cursor < texts.size()-1) {
             advanceCursor(true);
@@ -84,6 +113,10 @@ public class Track extends GraphicsGroup{
         texts.clear();
     }
 
+    /**
+     * Create an AudioBuffer object and play the entire melody, each note with the exact 
+     * same duration.
+     */
     public void playMelody() {
         AudioBuffer buffer = new AudioBuffer(
             Utils.convertSecondsToSamples(melody.size() * Note.NOTE_LENGTH));
@@ -103,6 +136,9 @@ public class Track extends GraphicsGroup{
         this.active = active;
     }
 
+    /**
+     * Move the cursor display one note over, forward if true and backward if false
+     */
     public void advanceCursor(boolean isForward) {
         if (isForward && cursor < texts.size() - 1) {
             cursor += 1;
