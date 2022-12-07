@@ -19,6 +19,7 @@ import javax.swing.Timer;
  * Adapted from Homework 5: Audio Synth
  * Github: https://github.com/Mac-COMP-127-Fall-2022/hw5-KienNguyen17
  */
+
 public class AudioBuffer {
     /**
      * The sample rate of all AudioBuffer instances, in samples / second.

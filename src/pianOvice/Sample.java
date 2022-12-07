@@ -6,7 +6,6 @@ import java.util.List;
  * Author: Kien Nguyen & Avianna Bui
  * Creates lists of notes that would be composed into a song in the main class
  */
-
 public class Sample {
     public static final List<Note> track1Sample = List.of(
         new Note("A3", 57), 

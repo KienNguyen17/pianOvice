@@ -7,7 +7,6 @@ import java.awt.Color;
  * Author: Kien Nguyen & Avianna Bui
  * Creates a piano key that is either a black or white rectangle associated with a single note
  */
-
 public class PianoKey extends Rectangle {
     private Note note;
 

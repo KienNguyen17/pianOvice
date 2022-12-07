@@ -12,7 +12,6 @@ import edu.macalester.graphics.ui.Button;
  * Author: Kien Nguyen & Avianna Bui
  * Generates and plays the composed music. Creates the program's functionings
  */
-
 public class PianOvice {
     private CanvasWindow canvas;
     private final int CANVAS_WIDTH = 840;
