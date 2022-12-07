@@ -8,6 +8,11 @@ import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.ui.Button;
 
+/**
+ * Author: Kien Nguyen & Avianna Bui
+ * Generates and plays the composed music. Creates the program's functionings
+ */
+
 public class PianOvice {
     private CanvasWindow canvas;
     private final int CANVAS_WIDTH = 840;
@@ -22,6 +27,9 @@ public class PianOvice {
     private Button sampleButton;
     private Button deleteButton;
 
+    /**
+     * Creates a canvas, displays the keyboard, and creates the music track and functionality buttons
+     */
     public PianOvice() {
         canvas = new CanvasWindow("PianOvice", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(new Color(0xB4869F));
@@ -29,21 +37,54 @@ public class PianOvice {
         keyboard = new Keyboard();
         keyboard.createKeys(canvas);
 
-        createTrack();
+        createTracks();
         createPlayButton();
         createSampleButton();
         createDeleteButton();
     }
 
-    private void createTrack() {
-        double trackHeight = canvas.getHeight() / 2;
+    private void createTracks() {
+        double trackHeight = CANVAS_HEIGHT / 2;
         for (int i = 0; i < NUMBER_OF_TRACK; i++) {
-            Track track = new Track(canvas.getWidth() / 2, trackHeight, canvas.getWidth());
+            Track track = new Track(CANVAS_WIDTH / 2, trackHeight, CANVAS_WIDTH);
             tracks.add(track);
             canvas.add(track);
             createBlock(track, trackHeight);
             createActiveButton(track);
             trackHeight += (-track.getHeight() - 5);
+        }
+    }
+
+    private void createBlock(Track track, double trackHeight) {
+        double blockWidth = 140;
+        Rectangle block = new Rectangle(CANVAS_WIDTH - blockWidth, 
+            trackHeight, blockWidth, CANVAS_WIDTH * 0.1);
+        block.setFillColor(Color.BLACK);
+        block.setCenter(CANVAS_WIDTH - blockWidth / 2, trackHeight);
+        canvas.add(block);
+    }
+
+    private void createActiveButton(Track track) {
+        activeButton = new Button("active/inactive");
+        activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth() + 44, track.getCenter().getY());
+        activeButton.onClick(() -> {
+            track.setActive(!track.isActive());
+            track.setColor(track.isActive() ? Color.WHITE : Color.DARK_GRAY);
+        });
+        canvas.add(activeButton);
+    }
+
+    private Track getActiveTrack() {
+        List<Track> activeTracks = new ArrayList<>();
+        for (Track track : tracks) {
+            if (track.isActive()) {
+                activeTracks.add(track);
+            }
+        }
+        if (activeTracks.size() == 1) {
+            return activeTracks.get(0);
+        } else {
+            return null;
         }
     }
 
@@ -92,39 +133,10 @@ public class PianOvice {
         canvas.add(deleteButton);
     }
 
-    private void createBlock(Track track, double trackHeight) {
-        double blockWidth = 140;
-        Rectangle block = new Rectangle(CANVAS_WIDTH - blockWidth, 
-            trackHeight, blockWidth,canvas.getWidth()*0.1);
-        block.setFillColor(Color.BLACK);
-        block.setCenter(CANVAS_WIDTH - blockWidth/2, trackHeight);
-        canvas.add(block);
-    }
-
-    private void createActiveButton(Track track) {
-        activeButton = new Button("active/inactive");
-        activeButton.setCenter(CANVAS_WIDTH - activeButton.getWidth() + 44, track.getCenter().getY());
-        activeButton.onClick(() -> {
-            track.setActive(!track.isActive());
-            track.setColor(track.isActive() ? Color.WHITE : Color.DARK_GRAY);
-        });
-        canvas.add(activeButton);
-    }
-
-    private Track getActiveTrack() {
-        List<Track> activeTracks = new ArrayList<>();
-        for (Track track : tracks) {
-            if (track.isActive()) {
-                activeTracks.add(track);
-            }
-        }
-        if (activeTracks.size() == 1) {
-            return activeTracks.get(0);
-        } else {
-            return null;
-        }
-    }
-
+    /**
+     * Creates and operates the functionalities of the program: buttons, track-dragging, sound
+     * generator when user clicks on the piano keys, note deletion, rest notes, and cursor operations. 
+     */
     public void run() {
         for (Track track: tracks) {
             activatePlayButton(track);
