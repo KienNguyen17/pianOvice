@@ -2,6 +2,9 @@ package pianOvice;
 
 /**
  * Utilities to do audio-related unit conversions.
+ * 
+ * Adapted from Homework 5: Audio Synth
+ * Github: https://github.com/Mac-COMP-127-Fall-2022/hw5-KienNguyen17
  */
 public class Utils {
     /**

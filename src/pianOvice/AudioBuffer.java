@@ -8,13 +8,16 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-/**
+/** 
  * A playable, modifiable, fixed-length buffer of audio samples. Only supports monophonic (i.e. not
  * stereo) audio. All AudioBuffers shared a single fixed sample rate, set with the SAMPLE_RATE
  * constant.
  *
  * Samples are 32-bit floats in the range [-1,1]. Samples outside that range are clipped during
  * playback.
+ * 
+ * Adapted from Homework 5: Audio Synth
+ * Github: https://github.com/Mac-COMP-127-Fall-2022/hw5-KienNguyen17
  */
 public class AudioBuffer {
     /**
@@ -44,7 +47,7 @@ public class AudioBuffer {
     }
 
     /**
-     * Fills the entire buffer by sampling the given signal, overwriting any data already present.
+     * Fills the entire buffer by sampling the given note, overwriting any data already present.
      */
     public void fill(Note note) {
         for (int n = 0; n < samples.length; n++) {
@@ -190,7 +193,7 @@ public class AudioBuffer {
      * Renders a slice of the given signal into this audio buffer, adding the new signal to the
      * sample values already present in the buffer.
      *
-     * @param signal    A sound source.
+     * @param note      A sound source.
      * @param offset    The number of samples into the audio buffer to start adding the new signal.
      *                  This offset is time 0 for the signal.
      * @param duration  The number of samples of the signal to add to the buffer. The offset +

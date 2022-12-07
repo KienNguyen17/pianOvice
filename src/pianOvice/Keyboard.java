@@ -6,6 +6,9 @@ import java.awt.Color;
 
 import edu.macalester.graphics.CanvasWindow;
 
+/**
+ * Create a keyboard that spans two octaves, stretching across the width of the canvas. 
+ */
 public class Keyboard {
     private List<PianoKey> keyList = new ArrayList<>();
     private List<String> whiteNotes;
@@ -17,6 +20,10 @@ public class Keyboard {
     private final int NUMBER_OF_BLACK_KEY = 24; 
     private final int FIRST_PITCH = 48;
 
+    /**
+     * Create a list of the names of the whitekeys and a list of the names of the black keys
+     * spanning two octaves, to be used when creating the keyboard.
+     */
     public Keyboard() {
         whiteNotes = List.of("C3", "D3", "E3", "F3", "G3", "A3", "B3", 
             "C4", "D4", "E4", "F4", "G4", "A4", "B4");
@@ -24,6 +31,11 @@ public class Keyboard {
             "C#4", "D#4", "F#4", "G#4", "A#4");
     }
 
+
+    /** 
+    * Draw the white and black keys on the canvas, 
+    * stretching across the width of the given canvas.
+    */
     public void createKeys(CanvasWindow canvas) {
         createWhiteKeys(canvas);
         createBlackKeys(canvas);
