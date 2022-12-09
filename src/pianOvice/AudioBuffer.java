@@ -9,6 +9,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /** 
+ * Author: Kien Nguyen & Avianna Bui
+ *
  * A playable, modifiable, fixed-length buffer of audio samples. Only supports monophonic (i.e. not
  * stereo) audio. All AudioBuffers shared a single fixed sample rate, set with the SAMPLE_RATE
  * constant.

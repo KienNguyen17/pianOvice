@@ -7,6 +7,8 @@ import java.util.List;
 import edu.macalester.graphics.*;
 
 /**
+ * Author: Kien Nguyen & Avianna Bui
+ * 
  * Create a track, represented on the canvas by a long rectangle that can display 
  * GraphicsText objects of the notes added, while keeping track of the order of the 
  * names and pitches of notes added to it.

@@ -1,6 +1,8 @@
 package pianOvice;
 
 /**
+ * Author: Kien Nguyen & Avianna Bui
+ * 
  * Utilities to do audio-related unit conversions.
  * 
  * Adapted from Homework 5: Audio Synth

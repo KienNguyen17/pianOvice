@@ -7,6 +7,7 @@ import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
 
 /**
+ * Author: Kien Nguyen & Avianna Bui
  * Create a keyboard that spans two octaves, stretching across the width of the canvas. 
  */
 public class Keyboard {

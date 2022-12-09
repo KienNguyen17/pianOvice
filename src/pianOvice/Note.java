@@ -1,6 +1,8 @@
 package pianOvice;
 
 /**
+ * Author: Kien Nguyen & Avianna Bui
+ * 
  * A single note with a pitch given in MIDI unit and a name.
  * 
  * Adapted from Homework 5: Audio Synth
