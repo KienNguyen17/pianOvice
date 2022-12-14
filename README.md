@@ -1,7 +1,3 @@
-# Project Title: PianOvice
-###### Members: Kien Nguyen, Avianna Bui
-
-## Project Description
 # Project: PianOvice
 ###### Members: Kien Nguyen, Avianna Bui
 
