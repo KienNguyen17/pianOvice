@@ -1,6 +1,8 @@
 # Project: PianOvice
 ###### Members: Kien Nguyen, Avianna Bui
 
+![Screenshot of PianOvice](pianovice.png)
+
 ## Project Description
 Our project features an interactive piano interface that allows users to compose three separate melodies that can be played simultaneously. Our code requires users to install Java 17 in order to use kilt-graphics, a graphic library developed by the Mathematics, Statistics, and Computer Science (MSCS) department in Macalester College: https://mac-comp127.github.io/kilt-graphics/index.html. It is written to run on Visual Studio Code.
 
